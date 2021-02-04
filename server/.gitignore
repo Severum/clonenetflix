@@ -3,7 +3,7 @@ node_modules
 /dist
 
 # local files
-# *.local.*
+*.local.*
 
 # Log files
 npm-debug.log*
