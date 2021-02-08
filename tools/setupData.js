@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
-// const fs = require('fs')
-// const youtubedl = require('youtube-dl')
+const fs = require('fs')
+const youtubedl = require('youtube-dl')
 
 const config = require('../server/configuration.js')
 const userModel = require('../server/dbMongo/models/user.js')
@@ -8,7 +8,7 @@ const usersData = require('../datas/mongo/users.json')
 const filmModel = require('../server/dbMongo/models/film.js')
 const filmsData = require('../datas/mongo/films.json')
 
-// const youtubeUrlRegex = /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/
+const youtubeUrlRegex = /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/
 
 function dbConnection() {
   return new Promise((resolve, reject) => {
@@ -32,21 +32,6 @@ function dbConnection() {
     })
   })
 }
-
-// function downloadVideo(film) {
-//   return new Promise(async (resolve, reject) => {
-//     if (!youtubeUrlRegex.test(film.ytlink)) {
-//       console.log("film.ytlink: "+film.ytlink)
-//       reject(new Error('not Youtube url'))
-//     }
-//     try {
-//       const video = youtubedl(film.ytlink)
-//       video.pipe(fs.createWriteStream(config.VIDEO_PATH+film.src))
-//     } catch (err) {
-//       reject(err)
-//     }
-//   })
-// }
 
 function dropCollections() {
   return new Promise(async (resolve, reject) => {
@@ -72,22 +57,42 @@ async function populateCollection(Model, jsonData) {
   })
 }
 
-async function run() {
+function downloadVideo(film) {
+  return new Promise(async (resolve, reject) => {
+    if (!youtubeUrlRegex.test(film.ytlink)) {
+      reject(new Error('not Youtube url'))
+    }
+    try {
+      const video = youtubedl(film.ytlink)
+      video.pipe(fs.createWriteStream(config.VIDEO_PATH+film.src))
+      video.on('end', function() {
+        console.log("download end: "+film.name)
+        resolve()
+      })
+    } catch (err) {
+      reject(err)
+    }
+  })
+}
+
+(async () => {
   try {
     await dbConnection()
     await dropCollections()
     await populateCollection(userModel, usersData)
     await populateCollection(filmModel, filmsData)
-    // console.log("filmData: "+filmsData.length)
-    // for (let i = 0; i<filmsData.length; i++) {
-    //   console.log("film: "+filmsData[i])
-    //   await downloadVideo(filmsData[i])
-    // }
-    // process.exit(0)
+    fs.mkdir(config.VIDEO_PATH, async (err) => {
+      console.log("download films")
+      if(!err || (err && err.code === 'EEXIST')){
+        for (let i = 0; i<filmsData.length; i++) {
+          await downloadVideo(filmsData[i])
+        }
+      } else {
+        throw err
+      }
+    })
   } catch (err) {
     console.log("err: "+err)
     throw err
   }
-}
-
-run()
+})()

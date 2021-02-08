@@ -1,6 +1,8 @@
 const fs = require('fs')
 const util = require('util')
 
+// console.log('\x1b[37m%s\x1b[0m', "I Am Using Yellow")
+
 const configuration = require('../../configuration.js')
 
 function _logReq(req) {

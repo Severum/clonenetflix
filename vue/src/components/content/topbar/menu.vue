@@ -1,9 +1,9 @@
 <template>
   <div id="topbarMenu" :class="$style.menustyle">
       <ul>
-          <li>Acceuil</li>
-          <li>Séries</li>
+          <li>Accueil</li>
           <li>Films</li>
+          <!-- <li>Séries</li> -->
       </ul>
   </div>
 </template>

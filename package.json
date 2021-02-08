@@ -4,8 +4,8 @@
   "description": "",
   "main": "appweb.js",
   "scripts": {
-    "build": "webpack --config ./prod.config.js --mode production",
-    "dev": "webpack --config ./dev.config.js --mode development --watch"
+    "build": "webpack --config ./prod.config.js",
+    "dev": "webpack --config ./dev.config.js --watch"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +13,7 @@
     "bcrypt": "^5.0.0",
     "css-loader": "^5.0.1",
     "express": "^4.17.1",
+    "helmet": "^4.4.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.0",
     "postcss": "^8.1.0",

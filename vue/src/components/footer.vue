@@ -1,5 +1,5 @@
 <template>
-  <div id="appfooter" :class="$style.appfooter">
+  <div id="appfooter" v-once :class="$style.appfooter">
     <!-- <div :class="$style.bug">Signaler un bug</div> -->
   </div>
 </template>

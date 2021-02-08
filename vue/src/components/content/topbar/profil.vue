@@ -3,7 +3,7 @@
         <svg :class="$style.svgprofil" v-on:click="toggle = !toggle">
             <rect rx="5" ry="5" width="30" height="30" style="fill:red;" />
         </svg>
-        <div v-show="toggle" :class="[ toggle ? $style.profilbackgroundtoggle : '', $style.profilbackground ]" v-on:click="toggle = !toggle"></div>
+        <div v-show="toggle" :class="$style.profilbackground" v-on:click="toggle = !toggle"></div>
         <div v-show="toggle" :class="$style.dropdownprofil">
             <a :class="$style.disconnect" v-on:click="disconnect()">Se déconnecter</a>
         </div>
@@ -51,10 +51,6 @@ export default {
     height: 100vh;
     width: 100vw;
     background-color: black;
-    opacity: 0;
-    transition: all 0.2s ease;
-}
-.profilbackgroundtoggle {
     opacity: 0.3;
 }
 .dropdownprofil {

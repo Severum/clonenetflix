@@ -1,13 +1,11 @@
 const configuration = require('./configuration.js')
 const express = require('express')
-var dbConnection = require('./dbMongo/dbConnection.js')
-var router = require('./app/rooter.js')
-
-
-// console.log('\x1b[37m%s\x1b[0m', "I Am Using Yellow")
-
+// const helmet = require("helmet")
+const dbConnection = require('./dbMongo/dbConnection.js')
+const router = require('./app/rooter.js')
 
 const app = express()
+// app.use(helmet())
 
 app.use(router)
 

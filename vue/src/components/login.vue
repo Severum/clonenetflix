@@ -47,16 +47,16 @@
     },
     methods: {
       postLogin: async function() {
+        // reset error message
         document.getElementById('serverrefuse').style.display = "none"
         document.getElementById('nologin').style.display = "none"
         document.getElementById('nopassword').style.display = "none"
-        if (this.login == "" || this.password == "") {
-          if (this.login == "") {
-            document.getElementById('nologin').style.display = "block"
-          }
-          if (this.password == "") {
-            document.getElementById('nopassword').style.display = "block"
-          }
+        if (this.login == "") {
+          document.getElementById('nologin').style.display = "block"
+          return
+        }
+        if (this.password == "") {
+          document.getElementById('nopassword').style.display = "block"
           return
         }
         try {
@@ -75,6 +75,8 @@
           } else {
             if (response.status == 400) {
               document.getElementById('serverrefuse').style.display = "block"
+            } else {
+              console.log("post login error: "+response.status)
             }
           }
         } catch(err) {

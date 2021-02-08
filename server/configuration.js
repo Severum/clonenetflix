@@ -4,7 +4,7 @@ const localConfig = require('./configuration.local.js')
 const development = {
   ENV: env,
   PROJECT_PATH: localConfig.PROJECT_LOCAL_PATH,
-  VIDEO_PATH: localConfig.PROJECT_LOCAL_PATH+"/datas/video/",
+  VIDEO_PATH: localConfig.PROJECT_LOCAL_PATH+"/datas/videos/",
   PUBLIC_PATH: localConfig.PROJECT_LOCAL_PATH+"/vue/public/",
   express: {
     PORT:3000

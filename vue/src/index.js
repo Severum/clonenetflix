@@ -3,7 +3,6 @@ import Vuex from 'vuex'
 import App from './App.vue'
 // ajouter index.html a ./dist lors de 'npm run build'
 require('file-loader?name=[name].[ext]!../index.html')
-
 Vue.use(Vuex)
 
 const store = new Vuex.Store({

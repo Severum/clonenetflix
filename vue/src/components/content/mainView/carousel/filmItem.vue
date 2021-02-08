@@ -3,7 +3,7 @@
     <div :class="[ isHover ? getHoverStyle() : '', $style.filmcard]">
       <img v-show="!isHover" :src="film.thumbnail" :class="$style.thumbnail">
       <div v-if="isHover" :class="$style.detailwrapper">
-        <video :src="'video/'+film.src+'?token='+token" autoplay :class="$style.video"></video>
+        <video :src="'video/'+film.src+'?token='+token" autoplay :class="$style.video" v-on:click="playFilm()"></video>
         <div :class="$style.control">
           <div :class="$style.circle" v-on:click="playFilm()">
             <div :class="$style.play">
@@ -118,6 +118,7 @@
   height: 100%;
 }
 .video {
+  cursor: pointer;
   width: 100%;
   height: auto;
 }

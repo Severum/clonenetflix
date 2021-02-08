@@ -1,6 +1,7 @@
 <template>
   <div id="searchbar" :class="[ toggle ? $style.searchbarToggle : '', $style.searchbar ]">
     <img v-show="!toggle" src="public/loupe.svg" :class="$style.svgloupe" v-on:click="toggle = !toggle"/>
+    <div v-show="toggle" :class="$style.searchbarbackground" v-on:click="toggle = !toggle"></div>
     <span v-show="toggle" :class="$style.toggleOn">
       <img src="public/loupe.svg" :class="[ $style.svgloupeOn, $style.svgloupe ]" v-on:click="toggle = !toggle"/>
       <input type="text" :class="[ toggle ? $style.inputstyleToggle : '', $style.inputstyle ]" placeholder="Titres, personnes, genres">
@@ -42,8 +43,18 @@ export default {
   /* color -> #ffffff; */
   filter: invert(100%) sepia(3%) saturate(13%) hue-rotate(81deg) brightness(106%) contrast(106%);
 }
+.searchbarbackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+    opacity: 0.3;
+}
 .toggleOn {
   display: flex;
+  height: 100%;
 }
 .svgloupeOn {
   margin-top: 5px;
@@ -55,23 +66,12 @@ export default {
   border: none;
   outline: 0;
   font-family: inherit;
+  font-size: 1em;
   color: #c3c3c3;
   width: 100%;
 }
 .inputstyle::placeholder {
   color: #c3c3c3;
-  opacity: 0;
-  transition: opacity 1s ease;
-}
-.inputstyle::-moz-placeholder {
-  color: #c3c3c3;
-  opacity: 0;
-  transition: opacity 1s ease;
-}
-.inputstyleToggle::placeholder {
-  opacity: 1;
-}
-.inputstyleToggle::-moz-placeholder {
-	opacity: 1;
+  font-size: 0.8em;
 }
 </style>

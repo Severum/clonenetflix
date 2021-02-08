@@ -5,6 +5,7 @@ const serverConfig = {
   entry: {
     server: path.join(__dirname, './server/server.js'),
   },
+  mode: 'production',
   target: 'node',
   output: {
     path: path.resolve(__dirname, './dist'),
@@ -16,6 +17,7 @@ const clientConfig = {
   entry: {
     index: path.join(__dirname, './vue/src/index.js'),
   },
+  mode: 'production', 
   target: 'web',
   output: {
     path: path.resolve(__dirname, './dist'),
