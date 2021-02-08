@@ -87,6 +87,7 @@ function downloadVideo(film) {
         for (let i = 0; i<filmsData.length; i++) {
           await downloadVideo(filmsData[i])
         }
+        process.exit(0)
       } else {
         throw err
       }
