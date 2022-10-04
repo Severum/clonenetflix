@@ -1,5 +1,5 @@
 var jwt = require('jsonwebtoken')
-const logger = require('../service/logger.js')
+const logger = require('../middlewares/logger.js')
 
 module.exports = {
     decodeToken: async (req, res, next) => {

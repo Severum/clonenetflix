@@ -15,6 +15,7 @@
           </div>
         </div>
         <div :class="$style.errormessages">
+          <div id='serverdown' :class="$style.errormessage">Server down</div>
           <div id='serverrefuse' :class="$style.errormessage">Wrong login or password</div>
           <div id='nologin' :class="$style.errormessage">no login</div>
           <div id='nopassword' :class="$style.errormessage">no password</div>
@@ -47,7 +48,7 @@
     },
     methods: {
       postLogin: async function() {
-        // reset error message
+        document.getElementById('serverdown').style.display = "none"
         document.getElementById('serverrefuse').style.display = "none"
         document.getElementById('nologin').style.display = "none"
         document.getElementById('nopassword').style.display = "none"
@@ -76,6 +77,7 @@
             if (response.status == 400) {
               document.getElementById('serverrefuse').style.display = "block"
             } else {
+              document.getElementById('serverdown').style.display = "block"
               console.log("post login error: "+response.status)
             }
           }
@@ -83,7 +85,6 @@
           console.log("fetch error: "+err.message)
         }
       },
-      // label must stay in place if user wrote something
       focusme: function(target) {
         document.getElementById(target+'wrapper').classList.remove(this.$style.forminputnotempty)
         document.getElementById(target+'wrapper').classList.add(this.$style.forminputfocus)

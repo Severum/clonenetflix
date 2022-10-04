@@ -3,8 +3,8 @@ var express = require('express')
 const bodyParser = require('body-parser')
 const filmHandler = require('./res/filmHandler.js')
 const auth = require('./res/authentication.js')
-const security = require('./service/security.js')
-const logger = require('./service/logger.js')
+const security = require('./middlewares/security.js')
+const logger = require('./middlewares/logger.js')
 
 try {
     logger.removeOldLog()

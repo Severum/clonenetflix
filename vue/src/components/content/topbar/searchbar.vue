@@ -1,10 +1,10 @@
 <template>
   <div id="searchbar" :class="[ toggle ? $style.searchbarToggle : '', $style.searchbar ]">
     <img v-show="!toggle" src="public/loupe.svg" :class="$style.svgloupe" v-on:click="toggle = !toggle"/>
-    <div v-show="toggle" :class="$style.searchbarbackground" v-on:click="toggle = !toggle"></div>
     <span v-show="toggle" :class="$style.toggleOn">
       <img src="public/loupe.svg" :class="[ $style.svgloupeOn, $style.svgloupe ]" v-on:click="toggle = !toggle"/>
-      <input type="text" :class="[ toggle ? $style.inputstyleToggle : '', $style.inputstyle ]" placeholder="Titres, personnes, genres">
+      <input type="text" :class="[ toggle ? $style.inputstyleToggle : '', $style.inputstyle ]" placeholder="Titres, personnes, genres" v-on:keyup.esc="toggle = false">
+      <div v-show="toggle" :class="$style.searchbarbackground" v-on:click="toggle = !toggle"></div>
     </span>
   </div>
 </template>
@@ -44,13 +44,13 @@ export default {
   filter: invert(100%) sepia(3%) saturate(13%) hue-rotate(81deg) brightness(106%) contrast(106%);
 }
 .searchbarbackground {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100vw;
-    background-color: black;
-    opacity: 0.3;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: black;
+  opacity: 0.3;
 }
 .toggleOn {
   display: flex;
@@ -62,6 +62,7 @@ export default {
   margin-right: 5px;
 }
 .inputstyle {
+  z-index: 10;
   background: transparent;
   border: none;
   outline: 0;

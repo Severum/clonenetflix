@@ -1,6 +1,6 @@
 const userModel = require('../../dbMongo/models/user.js')
 const jwt = require('jsonwebtoken')
-const logger = require('../service/logger')
+const logger = require('../middlewares/logger')
 // const bcrypt = require('bcrypt')
 
 module.exports = {

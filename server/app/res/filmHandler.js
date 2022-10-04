@@ -1,5 +1,5 @@
 const filmModel = require('../../dbMongo/models/film.js')
-const logger = require('../service/logger.js')
+const logger = require('../middlewares/logger.js')
 
 module.exports = {
     getFilms: async (req, res) => {
